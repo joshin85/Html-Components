@@ -1,29 +1,65 @@
 $(function(){
+ 
 	$('[data-toggle="tooltip"]').tooltip(); 
 	
 	$(".req-input input, .req-input textarea").on("click input", function(){
-		validate();
+		validate($(this).closest("[data-form-container]"));
+	});
+	
+	//This is for the on blur, if the form fields are all empty but the target was one of the fields do not reset to defaul state
+	var currentlySelected;
+	$(document).mousedown(function(e) {
+        currentlySelected = $(e.target);
+    });
+	
+	//Reset to form to the default state of the none of the fields were filled out
+	$(".req-input input,  .req-input textarea").on("blur", function(e){
+		var Parent = $(this).closest("[data-form-container]");
+		//if the target that was clicked is inside this form then do nothing
+		if(typeof currentlySelected != "undefined" && currentlySelected.parent().hasClass("req-input") && Parent.attr("id") == currentlySelected.closest(".form-container").attr("id"))
+			return;
+		
+		var length = 0;
+		Parent.find("input").each(function(){
+			length += $(this).val().length;
+		});
+		Parent.find("textarea").each(function(){
+			length += $(this).val().length;
+		});
+		if(length == 0){
+			var container = $(this).closest(".form-container");
+			resetForm(container);
+		}
 	});
 	
 	$("[data-toggle='tooltip']").on("mouseover", function(){
-		console.log("hello");
+		console.log($(this).parent().attr("class"));
 		if($(this).parent().hasClass("invalid")){
-			$(".tooltip").addClass("tooltip-invalid");
-		}
-		if($(this).parent().hasClass("valid")){
-			$(".tooltip").addClass("tooltip-valid");
+			$(".tooltip").addClass("tooltip-invalid").removeClass("tooltip-valid");
+		} else if($(this).parent().hasClass("valid")){
+			$(".tooltip").addClass("tooltip-valid").removeClass("tooltip-invalid");
+		} else {
+			$(".tooltip").removeClass("tooltip-invalid tooltip-valid");
 		}
 	});
 	
 })
 
-function validate(){
+function resetForm(target){
+	var container = target;
+		container.find(".valid, .invalid").removeClass("valid invalid")
+		container.css("background", "");
+		container.find(".form-title").css("color", "");
+}
+
+function validate(target){
 	var error = 0;
-	$(".req-input input, .req-input textarea").each(function(){
+	target.find(".req-input input, .req-input textarea").each(function(){
 		var type = $(this).attr("type");
 		var Parent = $(this).parent();
 		var val = $(this).val();
 		switch(type) {
+			case "password":
 			case "textarea":
 			case "text":
 				var minLength = $(this).data("min-length");
@@ -60,17 +96,20 @@ function validate(){
 				break;			
 		}	
 	});
-
+	
+	var submitForm = target.find(".submit-form");
+	var formContainer = target;
+	var formTitle = target.find(".form-title");
 	if(error == 0){
-		$(".form-container").css("background", "#C8E6C9");
-		$(".form-title").css("color", "#2E7D32");
-		$(".submit-form").addClass("valid");
-		$(".submit-form").removeClass("invalid");
+		formContainer.css("background", "#C8E6C9");
+		formTitle.css("color", "#2E7D32");
+		submitForm.addClass("valid");
+		submitForm.removeClass("invalid");
 	} else {			
-		$(".form-container").css("background", "#FFCDD2");
-		$(".form-title").css("color", "#C62828");
-		$(".submit-form").addClass("invalid");
-		$(".submit-form").removeClass("valid");
+		formContainer.css("background", "#FFCDD2");
+		formTitle.css("color", "#C62828");
+		submitForm.addClass("invalid");
+		submitForm.removeClass("valid");
 	}
 }
 function phonenumber(inputtxt) {  
