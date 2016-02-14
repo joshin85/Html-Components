@@ -24,33 +24,59 @@
   color:  #999;
 }
 
-.form-container .oauth-buttons {
+.oauth-buttons {
 	text-align:center;
 }
+.row {
+	text-align:center;
+}
+.login-container{
+	width:400px;
+	height:330px;
+	display:inline-block;
+	margin-top: -165px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin-left: -200px;
+}
+.form-container .create-account:hover{
+	opacity:.7;
+}
+.form-container .create-account{
+	color:inherit;
+	margin-top: 15px;
+    display: inline-block;
+	cursor:pointer;
+	text-decoration:none;
+}
 
-.form-container .oauth-buttons .fa{
+.oauth-buttons .fa{
+	cursor:pointer;
 	margin-top:10px;
-	color:white;
+	color:inherit;
 	width:30px;
 	height:30px;
 	text-align:center;
 	line-height:30px;
 	margin:5px;
-	margin-top:10px;
+	margin-top:15px;
 }
-
-.form-container .oauth-buttons .fa-google-plus:hover{
+.oauth-buttons .fa:hover{
+	color:white;
+}
+.oauth-buttons .fa-google-plus:hover{
 	background: #dd4b39;
 }
-.form-container .oauth-buttons .fa-facebook:hover{
+ .oauth-buttons .fa-facebook:hover{
 	background:	#8b9dc3;
 }
 
-.form-container .oauth-buttons .fa-linkedin:hover{
+.oauth-buttons .fa-linkedin:hover{
 	background:	#0077b5;
 }
 
-.form-container .oauth-buttons .fa-twitter:hover{
+.oauth-buttons .fa-twitter:hover{
 	background:	#55acee;
 }
 
@@ -94,6 +120,7 @@
 }
 
 .form-container .req-input{
+	float:left;
 	width:100%;
 	position:relative;
 	background:#00BCD4;
@@ -145,6 +172,7 @@
 
 .form-container div .row .valid {
 	background:#81C784;
+	
 }
 
 .form-container .valid .input-status:after {
@@ -179,11 +207,20 @@
 	padding:0px 5px;
 }
 
+.form-container .req-input.input-password{
+	margin-bottom:0px;
+}
+.form-container .req-input.confirm-password{
+	margin-top:0px;
+}
+
 .form-container {
 	margin:20px;
 	padding:20px;
 	border-radius:0px;
-	background:#B2EBF2;.
+	/*background:#B2EBF2;*/
+	background:#eee;
+	color:#282828;
 	-webkit-transition: all .3s ease-in-out;
 	-moz-transition: all .3s ease-in-out;
 	-o-transition: all .3s ease-in-out;
@@ -192,7 +229,7 @@
 
 .form-container .form-title{
 	font-size:25px;
-	color:#00838F;
+	color:inherit;
 	text-align:center;
 	margin-bottom:10px;
 	-webkit-transition: all .3s ease-in-out;
@@ -312,6 +349,7 @@
 
 .form-container input[type=text], .form-container input[type=password], .form-container input[type=email],input[type=tel]{
 	width:calc(100% - 50px);
+	float:left;
 	border-radius:0px;
 	border:0px solid #ddd;
 	padding:0px 9px;

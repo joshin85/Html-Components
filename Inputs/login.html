@@ -1,0 +1,68 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/input.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src="js/input.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	
+		<div class="login-container">
+			<form>
+			<div id="login-form" class="form-container" data-form-container>
+			<div class="row">
+				<div class="form-title">
+					<span>Login</span>
+				</div>
+			</div>
+			<div class="input-container">
+				<div class="row">
+					<span class="req-input" >
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
+						<input type="email" data-min-length="8" placeholder="Email">
+					</span>
+				</div>
+				<div class="row">
+					<span class="req-input input-password">
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
+						<input type="password" data-min-length="8" placeholder="Password">
+					</span>
+				</div>
+				
+				<div class="row" style="display:none">
+					<span class="req-input confirm-password">
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
+						<input type="password" data-min-length="8" placeholder="Confirm Password">
+					</span>
+				</div>
+				
+				<div class="row">
+					<a class="create-account"> Create an Account </a>
+				</div>
+				
+				<div class="row submit-row">
+					<button type="button" class="btn btn-block submit-form">Login</button>
+				</div>
+				<div class="oauth-buttons">
+					<span><i class="fa fa-facebook"></i> </span>
+					<span><i class="fa fa-google-plus"></i> </span>
+					<span><i class="fa fa-linkedin"></i> </span>
+					<span><i class="fa fa-twitter"></i> </span>
+				</div>
+					
+				
+			</div>
+			</div>
+		
+			</form>
+		</div>
+	
+	</div>
+</div>
+</body>
+</html>

@@ -32,6 +32,23 @@ $(function(){
 		}
 	});
 	
+	$(".create-account").on('click', function(){
+		if($(".confirm-password").is(":visible")){
+			$(this).text("Create an Account");
+			$(this).closest("[data-form-container]").find(".submit-form").text("Login");
+			$(".confirm-password").parent().slideUp(function(){
+				validate($(this).closest("[data-form-container]"));
+			});
+		} else {
+			$(this).closest("[data-form-container]").find(".submit-form").text("Create Account");
+			$(this).text("Already Have an Account");
+			$(".confirm-password").parent().slideDown(function(){
+				validate($(this).closest("[data-form-container]"));
+			});
+		}
+		
+	});
+	
 	$("[data-toggle='tooltip']").on("mouseover", function(){
 		console.log($(this).parent().attr("class"));
 		if($(this).parent().hasClass("invalid")){
@@ -47,52 +64,58 @@ $(function(){
 
 function resetForm(target){
 	var container = target;
-		container.find(".valid, .invalid").removeClass("valid invalid")
-		container.css("background", "");
-		container.find(".form-title").css("color", "");
+	container.find(".valid, .invalid").removeClass("valid invalid")
+	container.css("background", "");
+	container.css("color", "");
+	container.css("box-shadow","");
+}
+
+function setRow(valid, Parent){
+	var error = 0;
+	if(valid){
+		Parent.addClass("valid");
+		Parent.removeClass("invalid");
+	} else {
+		error = 1;
+		Parent.addClass("invalid");
+		Parent.removeClass("valid");
+	}
+	return error;
 }
 
 function validate(target){
 	var error = 0;
 	target.find(".req-input input, .req-input textarea").each(function(){
 		var type = $(this).attr("type");
+		
+		if($(this).parent().hasClass("confirm-password") && type == "password"){
+			var type = "confirm-password"; 
+		}
+		
 		var Parent = $(this).parent();
 		var val = $(this).val();
+		
+		if($(this).is(":visible") == false)
+			return true; //skip iteration
+		
 		switch(type) {
+			case "confirm-password":
+				var initialPassword = $(".input-password input").val();
+				error += setRow(initialPassword  == val && initialPassword.length > 0, Parent);
+				break;
 			case "password":
 			case "textarea":
 			case "text":
 				var minLength = $(this).data("min-length");
-					if(typeof minLength == "undefined")
-						minLength = 0;
-				if(val.length >= minLength){
-					Parent.addClass("valid");
-					Parent.removeClass("invalid");
-				} else {
-					error = 1;
-					Parent.addClass("invalid");
-					Parent.removeClass("valid");
-				}
+				if(typeof minLength == "undefined")
+					minLength = 0;
+				error += setRow(val.length >= minLength, Parent);
 				break; 
 			case "email":
-				if(validateEmail(val)){
-					Parent.addClass("valid");
-					Parent.removeClass("invalid");
-				} else {
-					error = 1;
-					Parent.addClass("invalid");
-					Parent.removeClass("valid");
-				}
+				error += setRow(validateEmail(val), Parent);
 				break;
 			case "tel":
-				if(phonenumber(val)){
-					Parent.addClass("valid");
-					Parent.removeClass("invalid");
-				} else {
-					error = 1;
-					Parent.addClass("invalid");
-					Parent.removeClass("valid");
-				}
+				error += setRow(phonenumber(val), Parent);
 				break;			
 		}	
 	});
@@ -101,13 +124,9 @@ function validate(target){
 	var formContainer = target;
 	var formTitle = target.find(".form-title");
 	if(error == 0){
-		formContainer.css("background", "#C8E6C9");
-		formTitle.css("color", "#2E7D32");
 		submitForm.addClass("valid");
 		submitForm.removeClass("invalid");
-	} else {			
-		formContainer.css("background", "#FFCDD2");
-		formTitle.css("color", "#C62828");
+	} else {		
 		submitForm.addClass("invalid");
 		submitForm.removeClass("valid");
 	}
