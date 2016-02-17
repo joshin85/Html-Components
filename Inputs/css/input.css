@@ -134,11 +134,11 @@
 	transition: all .3s ease-in-out;
 }
 
-.form-container div .row .invalid:hover{
+.form-container div.row .invalid:hover{
 	background:#EF9A9A;
 }
 
-.form-container div .row .invalid{
+.form-container div.row .invalid{
 	background:#E57373;
 }
 
@@ -166,11 +166,16 @@
     transform: rotate(-45deg);
 }
 
-.form-container div .row  .valid:hover{
+.form-container div.row .invalid.submit-form {
+	opacity:.5;
+	pointer-events: none;
+}
+
+.form-container div.row  .valid:hover{
 	background:#A5D6A7;
 }
 
-.form-container div .row .valid {
+.form-container div.row .valid {
 	background:#81C784;
 	
 }

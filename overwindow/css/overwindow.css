@@ -12,22 +12,93 @@
 	background:white;
 	color:#565656;
 	box-shadow:3px 3px 3px RGBA(0,0,0,.3);
+	overflow:auto;
 }
+
+.window-container .row.share-buttons {
+	padding:0px 15px;
+}
+
+.window-container .share-buttons .col-xs-3 span:hover{
+	opacity:.9;
+}
+
+.window-container .share-buttons .col-xs-3 {
+	padding:0px;
+}
+
+.window-container .share-buttons .col-xs-3 span{
+	padding:15px;
+	width:100%;
+	color:white;
+	cursor:pointer;
+}
+
+.window-container .share-buttons .fa-google-plus{
+	background: #dd4b39;
+}
+.window-container .share-buttons .fa-facebook{
+	background:	#8b9dc3;
+}
+
+.window-container .share-buttons .fa-linkedin{
+	background:	#0077b5;
+}
+
+.window-container .share-buttons .fa-twitter{
+	background:	#55acee;
+}
+.window-container .row {
+	padding:0px 15px;
+}
+
 
 .window-container .window-img{
 	width:100%;
-	padding:15px;
+	padding:0px 15px;
 }
 
 .window-container .container {
 	width:100%;
 }
 
-.window-container h2{	
-    margin-left: 30px;
-    padding-left: 30px;
-    margin-right: 53px;
-    border-bottom: 1px solid #ddd;
+.btn-group .btn.active, .btn-group .btn:focus{
+	background:#eee;
+	outline:none;
+	border-color:#ddd;
+	color:#282828;
+	box-shadow:none;
+}
+
+.btn-group .btn:hover{
+	background:#eee;
+}
+.btn-group .btn {
+	border-radius:0px;
+	border:1px solid #ddd;
+	color:#565656;
+}
+
+.btn {
+	background:white;
+	border-radius:0px;
+}
+
+.window-container h2, .window-container h3{	
+	text-align:center;
+	padding:0px 15px;
+}
+
+.window-container .form-container {
+	background:none;
+	margin:0px;
+	text-align:left;
+	padding:0px;
+}
+
+.window-container .form-container .btn.submit-form {
+	padding:10px 30px;
+	float:right;
 }
 
 .window-container.active{
