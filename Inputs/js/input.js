@@ -14,22 +14,7 @@ $(function(){
 	
 	//Reset to form to the default state of the none of the fields were filled out
 	$(".req-input input,  .req-input textarea").on("blur", function(e){
-		var Parent = $(this).closest("[data-form-container]");
-		//if the target that was clicked is inside this form then do nothing
-		if(typeof currentlySelected != "undefined" && currentlySelected.parent().hasClass("req-input") && Parent.attr("id") == currentlySelected.closest(".form-container").attr("id"))
-			return;
-		
-		var length = 0;
-		Parent.find("input").each(function(){
-			length += $(this).val().length;
-		});
-		Parent.find("textarea").each(function(){
-			length += $(this).val().length;
-		});
-		if(length == 0){
-			var container = $(this).closest(".form-container");
-			resetForm(container);
-		}
+		verifyReset($(this));
 	});
 	
 	$(".create-account").on('click', function(){
@@ -61,6 +46,25 @@ $(function(){
 	});
 	
 })
+
+function verifyReset(target){
+	var Parent = target.closest("[data-form-container]");
+	//if the target that was clicked is inside this form then do nothing
+	if(typeof currentlySelected != "undefined" && currentlySelected.parent().hasClass("req-input") && Parent.attr("id") == currentlySelected.closest(".form-container").attr("id"))
+		return;
+	
+	var length = 0;
+	Parent.find("input").each(function(){
+		length += target.val().length;
+	});
+	Parent.find("textarea").each(function(){
+		length += target.val().length;
+	});
+	if(length == 0){
+		var container = target.closest(".form-container");
+		resetForm(container);
+	}
+}
 
 function resetForm(target){
 	var container = target;

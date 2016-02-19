@@ -1,7 +1,7 @@
 $(function(){
 	
 	validate($(".window-container .form-container"));
-	
+	verifyReset($(".window-container .form-container"));
 	$("button").on("click", function(){
 		$(".window-container").addClass("active");
 	});
